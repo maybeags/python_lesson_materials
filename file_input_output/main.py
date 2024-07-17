@@ -19,6 +19,8 @@ p 226
             파일명은 입출력 작업을 수행할 파일을 의미.
             파일명만 작성할 수도 있고, 경로를 함께 작성할 수도 있음.
 '''
+import fileinput
+
 # open("sample.rtf")  # 파일명만 작성하는 경우 파이썬 소스 코드 파일과 같은 경로에 존재하는 파일
 # open("C:/sample.rtf")   # 전체 경로를 작성하는 방법
 # open("./sample.rtf")   # 현재 디렉토리(.)를 기준으로 경로 결정하는 방법
@@ -106,5 +108,56 @@ from prettytable import PrettyTable
         파일객체.close()
     
     3. 파일의 생성
-    
 '''
+# file = open("myFile.txt", "wt") # myTile.txt 파일을 쓰기 모드로 open -> 파일이 없는 상태기 때문에 새로 생성
+# print("myFile.txt 파일이 생성되었습니다.")
+# file.close()
+'''
+    4. with 문
+        close() 메서드를 잗ㅇ으로 호출할 수 있는 문법이 with문
+    형식 :
+        with open(파일명, 모드) as 파일객체:
+            파일처리코드
+'''
+# with open("myFile.txt", "wt") as file:
+#     print("myFile.txt 파일이 생성되었습니다.")
+'''
+2. 파일 출력(output)
+    1. 텍스트 파일 생성하기
+'''
+# file = open("hello.txt", "wt")
+#
+# file.write("안녕하세요")
+# file.write("\n")
+# file.write("반갑습니다.")
+# file.write("\n")
+# print("hello.txt 파일이 생성되었습니다.")
+#
+# file.close()
+'''
+    2. 텍스트 파일에 내용 추가하기
+'''
+# file.open("hello.txt", "at")
+#
+# file.write("Hello.\n")
+# file.write("Nice to meet you.\n")
+# print("hello.txt 파일에 새로운 내용이 추가되었습니다.")
+#
+# file.close()
+
+'''
+기본 예제
+
+오늘의 스케줄을 입력하면 그 내용을 모두 파일에 보관하는 프로그램입니다. 
+스케줄을 입력하지 않고 enter를 누르면 프로그램은 종료됩니다.
+생성되는 파일의 이름은 현재 날짜이고 확장자는 txt입니다. '2020-10-22.txt'와 같은 형식을 갖추고 있습니다.
+'''
+# import time
+#
+# file = open(time.strftime("%Y-%m-%d")+".txt", "at")
+# while True:
+#     schedule = input("오늘의 스케줄을 입력하세요. >>> ")
+#     if not schedule:
+#         break
+#     file.write(schedule + "\n")
+# file.close()
