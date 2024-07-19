@@ -161,3 +161,102 @@ from prettytable import PrettyTable
 #         break
 #     file.write(schedule + "\n")
 # file.close()
+'''
+p 233
+
+3. 파일 입력(input)
+
+    1. 텍스트 파일 읽기
+        1) read() 메서드
+        형식 :
+            file.read(size)
+'''
+
+file = open("hello.txt", "rt")
+
+str = file.read()
+print(str, end="")
+
+file.close()
+'''
+파일과 동일한 모습으로 출력하기 위해서 print() 함수의 자동 줄바꿈 방지를 위한 end=""속성 추가.
+
+read() 메서드를 통해 전체를 읽으려면 메모리 공간이 필요합니다. 읽어야 할 파일이 크다면 
+일부만 읽어 들이는 작업을 반복하는 반복문을 통해 파일 전체를 읽도록 구현하는 것이 좋다.
+'''
+
+file = open("hello.txt", "rt")
+
+while True:
+    str = file.read(5)
+    if not str:
+        break
+    print(str, end="")
+file.close()
+
+'''
+        2) readline() 메서드
+            텍스트 파일을 한 줄씩 읽어서 처리하는 메서드.
+            만약 파일이 종료되어 더 읽어들일 데이터가 없다면 빈 문자열("")을 읽어들입니다.
+            반복문을 이용해서 여러 번 읽어 들여야 파일 전체를 읽어들일 수 있습니다.
+
+'''
+file = open("hello.txt", "rt")
+
+while True:
+    str = file.readline()
+    if not str:
+        break
+    print(str, end="")
+file.close()
+
+'''
+        3) readlines() 메서드
+            전체 라인을 모두 읽어 각 라인 단위로 리스트에 저장하는 메서드
+'''
+file = open("hello.txt", "rt")
+line_list = file.readlines()
+
+file.close()
+
+file = open("hello.txt", "rt")
+line_list = file.readlines()
+for line in line_list:
+    print(line, end="")
+
+file.close()
+
+'''
+응용 예제
+ 
+나라별 수도를 순차적으로 반복시켜서 nation 리스트에 저장해두었습니다.
+
+nation 리스트의 내용을 이용하여 다음과 같은 nation.txt파일을 생성하세요.
+nation = ['그리스', '아테네', '독일', '베를린', '러시아', '모스크바', '미국', '워싱턴']
+<실행 예>
+
+생성된 nation.txt 파일의 내용은 다음과 같습니다.
+
+그리스 - 아테네
+독일 - 베를린
+러시아 - 모스크바
+미국 - 워싱턴
+
+nation = ['그리스', '아테네', '독일', '베를린', '러시아', '모스크바', '미국', '워싱턴']
+file = open('nation.txt', 'wt')
+file.write(nation[0]+'-'+nation[1]+'\n')
+file.write(nation[2]+'-'+nation[3]+'\n')
+file.write(nation[4]+'-'+nation[5]+'\n')
+file.write(nation[6]+'-'+nation[7])
+file.close()
+
+# 국가와 수도를 리스트로 정의합니다
+nation = ['그리스', '아테네', '독일', '베를린', '러시아', '모스크바', '미국', '워싱턴']
+
+# 파일을 쓰기 모드로 엽니다
+with open('nation.txt', 'wt', encoding='utf-8') as file:
+    # 리스트를 두 항목씩 반복하면서 파일에 쓰기합니다 (국가 - 수도 형태로)
+    for i in range(0, len(nation), 2):
+        file.write(nation[i] + ' - ' + nation[i + 1] + '\n')
+
+'''
